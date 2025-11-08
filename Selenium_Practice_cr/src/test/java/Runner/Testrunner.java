@@ -1,11 +1,22 @@
 package Runner;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
+import com.aventstack.extentreports.ExtentReports;
+import com.aventstack.extentreports.ExtentTest;
+import com.aventstack.extentreports.Status;
+import org.testng.annotations.*;
 import pages.LoginPage;
 import utilities.Base;
+import utilities.ExtendReport;
 
 public class Testrunner extends Base {
+
+    ExtentReports exreport;
+    ExtentTest extest;
+
+    @BeforeTest
+    public void Reportgenerate(){
+
+        exreport = ExtendReport.createreport();
+    }
 
     @BeforeMethod
     public void OpenBrowser(){
@@ -19,9 +30,17 @@ public class Testrunner extends Base {
 
             obj1.Login();
 
+            extest = exreport.createTest("Log  Browser");
+
+            extest.log(Status.INFO, "Page title is: " + driver.getTitle());
+
+            extest.pass("login successfully!");
+
 
         } catch (Exception e) {
             e.printStackTrace();
+
+            extest.fail("Login Failed");
         }
     }
     @AfterMethod
@@ -30,5 +49,11 @@ public class Testrunner extends Base {
         driver.quit();
 
 
+    }
+
+    @AfterTest
+
+    public void flushreport(){
+        exreport.flush();
     }
 }

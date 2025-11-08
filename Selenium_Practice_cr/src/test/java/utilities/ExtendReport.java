@@ -15,7 +15,7 @@ public class ExtendReport {
 
         String Reportpath = System.getProperty("user.dir")+"\\src\\main\\resources\\reports";
 
-        ExtentSparkReporter sparkreporter = new ExtentSparkReporter(Reportpath);
+        ExtentSparkReporter sparkreporter = new ExtentSparkReporter(Reportpath + "\\index.html");
 
         sparkreporter.config().setDocumentTitle("Selenium Demo Report");
         sparkreporter.config().setReportName("Selenium results");

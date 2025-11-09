@@ -25,9 +25,7 @@ public class LoginPage {
 
         helper.Click(driver.findElement(LoginUI.Login));
 
-        helper.ImplicitWait();
-
-        helper.TakeScreenshot();
+        helper.wait(200);
 
     }
 }
